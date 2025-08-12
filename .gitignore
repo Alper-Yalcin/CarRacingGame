@@ -1,0 +1,14 @@
+# Unreal Engine build and cache folders
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Visual Studio files
+.vs/
+*.sln
+*.vsconfig
+
+# Other
+*.log
+*.tmp
