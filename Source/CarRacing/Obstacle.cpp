@@ -23,7 +23,11 @@ AObstacle::AObstacle()
 void AObstacle::BeginPlay()
 {
 	Super::BeginPlay();
+
 	CapsuleComponent->OnComponentBeginOverlap.AddDynamic(this, &AObstacle::OnOverlapBegin);
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(GetWorld());
+	MyGameMode = Cast<AMyGameMode>(GameMode);
+
 }
 
 void AObstacle::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -33,7 +37,9 @@ void AObstacle::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor*
 	{
 		if(Player->CanMove)
 		{
+			UGameplayStatics::PlaySound2D(GetWorld(), HitSound);
 			Player->CanMove = false;
+			MyGameMode->ResetLevel(IsFinishLine);
 		}
 	}
 }

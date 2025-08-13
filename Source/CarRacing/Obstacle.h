@@ -7,6 +7,9 @@
 
 #include "Components/CapsuleComponent.h"
 #include "PaperSpriteComponent.h"
+#include "MyGameMode.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
 
 #include "Obstacle.generated.h"
 
@@ -27,6 +30,14 @@ public:
 	UCapsuleComponent* CapsuleComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UPaperSpriteComponent* ObstacleSprite;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase* HitSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsFinishLine = false;
+
+	AMyGameMode* MyGameMode;
+
+
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
